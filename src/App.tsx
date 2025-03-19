@@ -1,5 +1,5 @@
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,6 +18,8 @@ import AdminTeams from "./pages/admin/Teams";
 import AdminPlayers from "./pages/admin/Players";
 import AdminMatches from "./pages/admin/Matches";
 import AdminPages from "./pages/admin/Pages";
+import AdminUsers from "./pages/admin/Users";
+import AdminNews from "./pages/admin/News";
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const queryClient = new QueryClient({
@@ -54,6 +56,8 @@ const App = () => (
                 <Route path="players" element={<AdminPlayers />} />
                 <Route path="matches" element={<AdminMatches />} />
                 <Route path="pages" element={<AdminPages />} />
+                <Route path="users" element={<AdminUsers />} />
+                <Route path="news" element={<AdminNews />} />
               </Route>
               
               {/* Main Navigation Routes */}

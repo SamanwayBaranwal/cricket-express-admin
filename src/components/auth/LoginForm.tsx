@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2 } from "lucide-react";
+import { Loader2, Info } from "lucide-react";
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -28,7 +28,7 @@ export function LoginForm() {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -36,7 +36,7 @@ export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await login({
-        email: data.email,
+        username: data.username,
         password: data.password
       });
       setSuccessMessage("Login successful!");
@@ -54,14 +54,14 @@ export function LoginForm() {
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="username">Username</Label>
             <Input
-              id="email"
-              placeholder="example@cricketexpress.com"
-              {...register("email")}
+              id="username"
+              placeholder="Enter your username"
+              {...register("username")}
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
+            {errors.username && (
+              <p className="text-sm text-red-500">{errors.username.message}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -76,6 +76,14 @@ export function LoginForm() {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
+          
+          <Alert className="bg-blue-50 border-blue-200 text-blue-700">
+            <Info className="h-4 w-4 mr-2" />
+            <AlertDescription>
+              Admin credentials: Username: <span className="font-bold">admin</span>, Password: <span className="font-bold">Admin@123</span>
+            </AlertDescription>
+          </Alert>
+          
           {error && (
             <Alert variant="destructive" className="mt-4">
               <AlertDescription>{error}</AlertDescription>

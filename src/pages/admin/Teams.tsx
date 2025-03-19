@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import AdminLayout from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -137,211 +136,59 @@ export default function AdminTeams() {
   }));
 
   return (
-    <AdminLayout>
-      <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight">Team Management</h2>
-          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-            <DialogTrigger asChild>
-              <Button className="flex items-center gap-1">
-                <Plus className="h-4 w-4" />
-                Add Team
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[600px]">
-              <DialogHeader>
-                <DialogTitle>Add New Team</DialogTitle>
-                <DialogDescription>
-                  Create a new team with details and settings.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Team Name</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      placeholder="e.g. Mumbai Indians"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="shortName">Short Name</Label>
-                    <Input
-                      id="shortName"
-                      value={formData.shortName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, shortName: e.target.value })
-                      }
-                      placeholder="e.g. MI"
-                      maxLength={5}
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="tournament">Tournament</Label>
-                  <Select
-                    value={formData.tournament}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, tournament: value })
-                    }
-                  >
-                    <SelectTrigger id="tournament">
-                      <SelectValue placeholder="Select tournament" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {tournamentOptions.map((tournament) => (
-                        <SelectItem key={tournament.id} value={tournament.name}>
-                          {tournament.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="coach">Coach</Label>
-                    <Input
-                      id="coach"
-                      value={formData.coach}
-                      onChange={(e) =>
-                        setFormData({ ...formData, coach: e.target.value })
-                      }
-                      placeholder="Team Coach"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="captain">Captain</Label>
-                    <Input
-                      id="captain"
-                      value={formData.captain}
-                      onChange={(e) =>
-                        setFormData({ ...formData, captain: e.target.value })
-                      }
-                      placeholder="Team Captain"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="homeGround">Home Ground</Label>
-                  <Input
-                    id="homeGround"
-                    value={formData.homeGround}
-                    onChange={(e) =>
-                      setFormData({ ...formData, homeGround: e.target.value })
-                    }
-                    placeholder="e.g. Wankhede Stadium, Mumbai"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="logo">Team Logo</Label>
-                    <div className="flex items-center gap-2">
-                      <Input
-                        id="logo"
-                        value={formData.logo}
-                        onChange={(e) =>
-                          setFormData({ ...formData, logo: e.target.value })
-                        }
-                        placeholder="/teams/logo.png"
-                      />
-                      <Button variant="outline" size="icon">
-                        <Upload className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="playerCount">Player Count</Label>
-                    <Input
-                      id="playerCount"
-                      type="number"
-                      value={formData.playerCount}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          playerCount: parseInt(e.target.value),
-                        })
-                      }
-                      placeholder="Number of players"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea
-                    id="description"
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                    placeholder="Brief description of the team"
-                  />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button
-                  variant="outline"
-                  onClick={() => setIsAddDialogOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button onClick={handleAddTeam}>Add Team</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
-
-        {/* Edit Team Dialog */}
-        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+    <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-bold tracking-tight">Team Management</h2>
+        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="flex items-center gap-1">
+              <Plus className="h-4 w-4" />
+              Add Team
+            </Button>
+          </DialogTrigger>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
-              <DialogTitle>Edit Team</DialogTitle>
+              <DialogTitle>Add New Team</DialogTitle>
               <DialogDescription>
-                Update team details and settings.
+                Create a new team with details and settings.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="edit-name">Team Name</Label>
+                  <Label htmlFor="name">Team Name</Label>
                   <Input
-                    id="edit-name"
+                    id="name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
+                    placeholder="e.g. Mumbai Indians"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="edit-shortName">Short Name</Label>
+                  <Label htmlFor="shortName">Short Name</Label>
                   <Input
-                    id="edit-shortName"
+                    id="shortName"
                     value={formData.shortName}
                     onChange={(e) =>
                       setFormData({ ...formData, shortName: e.target.value })
                     }
+                    placeholder="e.g. MI"
                     maxLength={5}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="edit-tournament">Tournament</Label>
+                <Label htmlFor="tournament">Tournament</Label>
                 <Select
                   value={formData.tournament}
                   onValueChange={(value) =>
                     setFormData({ ...formData, tournament: value })
                   }
                 >
-                  <SelectTrigger id="edit-tournament">
+                  <SelectTrigger id="tournament">
                     <SelectValue placeholder="Select tournament" />
                   </SelectTrigger>
                   <SelectContent>
@@ -356,133 +203,101 @@ export default function AdminTeams() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="edit-coach">Coach</Label>
+                  <Label htmlFor="coach">Coach</Label>
                   <Input
-                    id="edit-coach"
+                    id="coach"
                     value={formData.coach}
                     onChange={(e) =>
                       setFormData({ ...formData, coach: e.target.value })
                     }
+                    placeholder="e.g. Rahul Dravid"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="edit-captain">Captain</Label>
+                  <Label htmlFor="captain">Captain</Label>
                   <Input
-                    id="edit-captain"
+                    id="captain"
                     value={formData.captain}
                     onChange={(e) =>
                       setFormData({ ...formData, captain: e.target.value })
                     }
+                    placeholder="e.g. Rohit Sharma"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="edit-homeGround">Home Ground</Label>
+                <Label htmlFor="homeGround">Home Ground</Label>
                 <Input
-                  id="edit-homeGround"
+                  id="homeGround"
                   value={formData.homeGround}
                   onChange={(e) =>
                     setFormData({ ...formData, homeGround: e.target.value })
                   }
+                  placeholder="e.g. Wankhede Stadium, Mumbai"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="edit-logo">Team Logo</Label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      id="edit-logo"
-                      value={formData.logo}
-                      onChange={(e) =>
-                        setFormData({ ...formData, logo: e.target.value })
-                      }
-                    />
-                    <Button variant="outline" size="icon">
-                      <Upload className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="edit-playerCount">Player Count</Label>
+              <div className="space-y-2">
+                <Label htmlFor="logo">Team Logo URL</Label>
+                <div className="flex gap-2">
                   <Input
-                    id="edit-playerCount"
-                    type="number"
-                    value={formData.playerCount}
+                    id="logo"
+                    value={formData.logo}
                     onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        playerCount: parseInt(e.target.value),
-                      })
+                      setFormData({ ...formData, logo: e.target.value })
                     }
+                    placeholder="https://example.com/logo.png"
                   />
+                  <Button variant="outline" size="icon">
+                    <Upload className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="edit-description">Description</Label>
+                <Label htmlFor="description">Team Description</Label>
                 <Textarea
-                  id="edit-description"
+                  id="description"
                   value={formData.description}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
+                  placeholder="Brief description about the team..."
+                  rows={3}
                 />
               </div>
             </div>
             <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setIsEditDialogOpen(false)}
-              >
+              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleEditTeam}>Save Changes</Button>
+              <Button onClick={handleAddTeam}>Add Team</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
+      </div>
 
-        {/* Delete Team Dialog */}
-        <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Confirm Deletion</DialogTitle>
-              <DialogDescription>
-                Are you sure you want to delete the team "{selectedTeam?.name}"?
-                This action cannot be undone.
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <Button
-                variant="outline"
-                onClick={() => setIsDeleteDialogOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button variant="destructive" onClick={handleDeleteTeam}>
-                Delete Team
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-
-        {/* Search and Filter */}
-        <div className="flex items-center gap-4">
-          <div className="flex-1">
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-end justify-between">
+          <div className="grid gap-2">
+            <Label htmlFor="search">Search Teams</Label>
             <Input
-              placeholder="Search teams..."
+              id="search"
+              placeholder="Search by team name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-[250px]"
             />
           </div>
-          <div className="w-[200px]">
+          <div className="grid gap-2">
+            <Label htmlFor="tournamentFilter">Filter by Tournament</Label>
             <Select
               value={tournamentFilter}
               onValueChange={setTournamentFilter}
             >
-              <SelectTrigger>
-                <SelectValue placeholder="Filter by tournament" />
+              <SelectTrigger id="tournamentFilter" className="w-[180px]">
+                <SelectValue placeholder="All Tournaments" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">All Tournaments</SelectItem>
@@ -496,7 +311,6 @@ export default function AdminTeams() {
           </div>
         </div>
 
-        {/* Team List */}
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -513,33 +327,27 @@ export default function AdminTeams() {
             <TableBody>
               {filteredTeams.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center">
-                    No teams found.
+                  <TableCell colSpan={7} className="text-center py-4">
+                    No teams found. Add a new team to get started.
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredTeams.map((team) => (
                   <TableRow key={team.id}>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                          {team.logo ? (
-                            <img
-                              src={team.logo}
-                              alt={team.name}
-                              className="h-6 w-6 object-contain"
-                            />
-                          ) : (
-                            <span className="text-xs font-bold">
-                              {team.shortName}
-                            </span>
-                          )}
-                        </div>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        {team.logo && (
+                          <img
+                            src={team.logo}
+                            alt={team.name}
+                            className="h-8 w-8 rounded-full object-cover"
+                          />
+                        )}
                         <div>
-                          <p className="font-medium">{team.name}</p>
-                          <p className="text-xs text-muted-foreground">
+                          <div>{team.name}</div>
+                          <div className="text-xs text-gray-500">
                             {team.shortName}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </TableCell>
@@ -549,22 +357,21 @@ export default function AdminTeams() {
                     <TableCell>{team.homeGround}</TableCell>
                     <TableCell>{team.playerCount}</TableCell>
                     <TableCell className="text-right">
-                      <div className="flex justify-end space-x-2">
+                      <div className="flex justify-end gap-2">
                         <Button
                           variant="ghost"
                           size="icon"
                           onClick={() => openEditDialog(team)}
                         >
                           <Pencil className="h-4 w-4" />
-                          <span className="sr-only">Edit</span>
                         </Button>
                         <Button
                           variant="ghost"
                           size="icon"
+                          className="text-red-500"
                           onClick={() => openDeleteDialog(team)}
                         >
                           <Trash2 className="h-4 w-4" />
-                          <span className="sr-only">Delete</span>
                         </Button>
                       </div>
                     </TableCell>
@@ -575,6 +382,154 @@ export default function AdminTeams() {
           </Table>
         </div>
       </div>
-    </AdminLayout>
+
+      {/* Edit Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Edit Team</DialogTitle>
+            <DialogDescription>
+              Update team details and settings.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-name">Team Name</Label>
+                <Input
+                  id="edit-name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-shortName">Short Name</Label>
+                <Input
+                  id="edit-shortName"
+                  value={formData.shortName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, shortName: e.target.value })
+                  }
+                  maxLength={5}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit-tournament">Tournament</Label>
+              <Select
+                value={formData.tournament}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, tournament: value })
+                }
+              >
+                <SelectTrigger id="edit-tournament">
+                  <SelectValue placeholder="Select tournament" />
+                </SelectTrigger>
+                <SelectContent>
+                  {tournamentOptions.map((tournament) => (
+                    <SelectItem key={tournament.id} value={tournament.name}>
+                      {tournament.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-coach">Coach</Label>
+                <Input
+                  id="edit-coach"
+                  value={formData.coach}
+                  onChange={(e) =>
+                    setFormData({ ...formData, coach: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-captain">Captain</Label>
+                <Input
+                  id="edit-captain"
+                  value={formData.captain}
+                  onChange={(e) =>
+                    setFormData({ ...formData, captain: e.target.value })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit-homeGround">Home Ground</Label>
+              <Input
+                id="edit-homeGround"
+                value={formData.homeGround}
+                onChange={(e) =>
+                  setFormData({ ...formData, homeGround: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit-logo">Team Logo URL</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="edit-logo"
+                  value={formData.logo}
+                  onChange={(e) =>
+                    setFormData({ ...formData, logo: e.target.value })
+                  }
+                />
+                <Button variant="outline" size="icon">
+                  <Upload className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="edit-description">Team Description</Label>
+              <Textarea
+                id="edit-description"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+                rows={3}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleEditTeam}>Save Changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Team</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this team? This action cannot be
+              undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteTeam}>
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
+

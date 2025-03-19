@@ -15,6 +15,8 @@ import {
   ChevronDown,
   PlaySquare,
   FileText,
+  UserCog,
+  LayoutDashboard,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -71,7 +73,7 @@ export default function AdminLayout() {
                 location.pathname === "/admin" ? "bg-gray-100 dark:bg-gray-800" : ""
               }`}
             >
-              <Home className="h-4 w-4" />
+              <LayoutDashboard className="h-4 w-4" />
               <span>Dashboard</span>
             </Link>
             <Link
@@ -111,6 +113,15 @@ export default function AdminLayout() {
               <span>Matches</span>
             </Link>
             <Link
+              to="/admin/news"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 ${
+                location.pathname === "/admin/news" ? "bg-gray-100 dark:bg-gray-800" : ""
+              }`}
+            >
+              <Newspaper className="h-4 w-4" />
+              <span>News & Articles</span>
+            </Link>
+            <Link
               to="/admin/pages"
               className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 ${
                 location.pathname === "/admin/pages" ? "bg-gray-100 dark:bg-gray-800" : ""
@@ -118,6 +129,15 @@ export default function AdminLayout() {
             >
               <FileText className="h-4 w-4" />
               <span>Pages</span>
+            </Link>
+            <Link
+              to="/admin/users"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50 ${
+                location.pathname === "/admin/users" ? "bg-gray-100 dark:bg-gray-800" : ""
+              }`}
+            >
+              <UserCog className="h-4 w-4" />
+              <span>User Management</span>
             </Link>
           </nav>
           {/* User Menu */}

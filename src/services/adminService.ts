@@ -390,25 +390,52 @@ const initialMatches: Match[] = [
 
 const initialCustomPages: CustomPage[] = [];
 
-const initialActivities: any[] = [
+const initialActivities = [
   {
     id: "1",
-    type: "tournament",
-    description: "IPL 2025 schedule updated",
-    timestamp: new Date("2025-03-15T10:30:00"),
+    type: "tournament_added",
+    message: "IPL 2025 tournament was created",
+    user: "Admin",
+    timestamp: new Date(2025, 2, 18, 14, 30), // March 18, 2025, 14:30
+    entityId: "1",
+    entityType: "tournament"
   },
   {
     id: "2",
-    type: "team",
-    description: "Mumbai Indians roster updated",
-    timestamp: new Date("2025-03-10T14:45:00"),
+    type: "team_added",
+    message: "Mumbai Indians team was added to IPL 2025",
+    user: "Admin",
+    timestamp: new Date(2025, 2, 18, 15, 45), // March 18, 2025, 15:45
+    entityId: "1",
+    entityType: "team"
   },
   {
     id: "3",
-    type: "player",
-    description: "Rohit Sharma profile updated",
-    timestamp: new Date("2025-03-08T09:15:00"),
+    type: "match_updated",
+    message: "Match #1 score was updated: MI 186/4 vs CSK 183/7",
+    user: "Admin",
+    timestamp: new Date(2025, 2, 19, 9, 15), // March 19, 2025, 09:15
+    entityId: "1",
+    entityType: "match"
   },
+  {
+    id: "4",
+    type: "player_added",
+    message: "Virat Kohli was added to Royal Challengers Bangalore",
+    user: "Admin",
+    timestamp: new Date(2025, 2, 19, 11, 30), // March 19, 2025, 11:30
+    entityId: "3",
+    entityType: "player"
+  },
+  {
+    id: "5",
+    type: "tournament_updated",
+    message: "T20 World Cup 2025 dates were updated",
+    user: "Admin",
+    timestamp: new Date(2025, 2, 19, 13, 45), // March 19, 2025, 13:45
+    entityId: "2",
+    entityType: "tournament"
+  }
 ];
 
 // Create store types
